@@ -185,10 +185,10 @@ public class Simple {
      */
     public static int searchInsert1(int[] nums, int target) {
         int len = nums.length;
-        if(len == 0){
+        if (len == 0) {
             return 1;
         }
-        int i ;
+        int i;
         for (i = 0; i < len; i++) {
             if (nums[i] >= target) {
                 break;
@@ -199,17 +199,18 @@ public class Simple {
 
     /**
      * 二分算法
+     *
      * @param nums
      * @param target
      * @return
      */
     public static int searchInsert2(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
-        while(left <= right) {
+        while (left <= right) {
             int mid = (left + right) / 2;
-            if(nums[mid] == target) {
+            if (nums[mid] == target) {
                 return mid;
-            } else if(nums[mid] < target) {
+            } else if (nums[mid] < target) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
@@ -219,14 +220,61 @@ public class Simple {
 
     }
 
+    /**
+     * 「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。前五项如下：
+     * <p>
+     * 1.     1
+     * 2.     11
+     * 3.     21
+     * 4.     1211
+     * 5.     111221
+     * 1 被读作  "one 1"  ("一个一") , 即 11。
+     * 11 被读作 "two 1s" ("两个一"）, 即 21。
+     * 21 被读作 "one 2",  "one 1" （"一个二" ,  "一个一") , 即 1211。
+     * <p>
+     * 给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/count-and-say
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param n
+     * @return
+     */
+    public static String countAndSay(int n) {
+        String result = "";
+        for (int i = 1; i <= n; i++) {
+            StringBuilder tem = new StringBuilder();
+            if (i == 1) {
+                result = "1";
+            } else {
+                int length = result.length();
+                int count = 1;
+                char c = result.charAt(0);
+                for (int j = 1; j < length; j++) {
+
+                    if (c == result.charAt(j)) {
+                        count++;
+                    } else {
+                        tem.append(count).append(c);
+                        c = result.charAt(j);
+                        count = 1;
+                    }
+                }
+                tem.append(count).append(c);
+                result = tem.toString();
+            }
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         /*int[] nums = {1, 2, 3, 4};
         System.out.printf("length:" + removeElement(nums, 2));*/
-        String s1 = "hello";
+      /*  String s1 = "hello";
         String s2 = "ll";
-        System.out.printf("result :%d", strStr(s1, s2));
-
+        System.out.printf("result :%d", strStr(s1, s2));*/
+        System.out.printf(""+ countAndSay(5));
     }
 
 }
