@@ -305,32 +305,63 @@ public class Simple {
         return max;*/
         //方法2：解法二、动态规划
 
-            int len = nums.length;
-            if (len == 0) {
-                return 0;
+        int len = nums.length;
+        if (len == 0) {
+            return 0;
+        }
+        int[] dp = new int[len];
+        dp[0] = nums[0];
+        for (int i = 1; i < len; i++) {
+            if (dp[i - 1] >= 0) {
+                dp[i] = dp[i - 1] + nums[i];
+            } else {
+                dp[i] = nums[i];
             }
-            int[] dp = new int[len];
-            dp[0] = nums[0];
-            for (int i = 1; i < len; i++) {
-                if (dp[i - 1] >= 0) {
-                    dp[i] = dp[i - 1] + nums[i];
-                } else {
-                    dp[i] = nums[i];
-                }
-            }
-            // 最后不要忘记全部看一遍求最大值
-            int res = dp[0];
-            for (int i = 1; i < len; i++) {
-                res = Math.max(res, dp[i]);
-            }
-            return res;
-
-
-
-
-
-
+        }
+        // 最后不要忘记全部看一遍求最大值
+        int res = dp[0];
+        for (int i = 1; i < len; i++) {
+            res = Math.max(res, dp[i]);
+        }
+        return res;
     }
+
+    /**
+     * 给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。
+     * <p>
+     * 如果不存在最后一个单词，请返回 0 。
+     * <p>
+     * 说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。
+     * <p>
+     *  
+     * <p>
+     * 示例:
+     * <p>
+     * 输入: "Hello World"
+     * 输出: 5
+     *
+     * @param s
+     * @return
+     */
+    public static int lengthOfLastWord(String s) {
+        int len = s.length();
+        if (len == 0) {
+            return 0;
+        }
+        int i = len - 1;
+        int count = 0;
+        while (i >= 0) {
+            if (s.charAt(i) != ' ') {
+                count++;
+            }
+            if (count > 0 && s.charAt(i) == ' ') {
+                break;
+            }
+            i--;
+        }
+        return count;
+    }
+
 
     public static void main(String[] args) {
         int[] nums = {1, -2, 3, 4};
@@ -339,7 +370,8 @@ public class Simple {
         String s2 = "ll";
         System.out.printf("result :%d", strStr(s1, s2));*/
         //System.out.printf("" + countAndSay(5));
-        maxSubArray(nums);
+        //maxSubArray(nums);
+        System.out.println(lengthOfLastWord("a"));
     }
 
 }
