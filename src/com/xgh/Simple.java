@@ -409,6 +409,45 @@ public class Simple {
 
     }
 
+    /**
+     * 67. 二进制求和
+     * 给你两个二进制字符串，返回它们的和（用二进制表示）。
+     * <p>
+     * 输入为 非空 字符串且只包含数字 1 和 0。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: a = "11", b = "1"
+     * 输出: "100"
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        if (a.isEmpty()) {
+            return b;
+        }
+        if (b.isEmpty()) {
+            return a;
+        }
+        int ca = 0;
+        int lena = a.length() - 1;
+        int lenb = b.length() - 1;
+        for (int i = lena, j = lenb; i >= 0 || j >= 0; i--, j--) {
+            int sum = ca;
+            sum += i >= 0 ? a.charAt(i) - '0' : 0;
+            sum += j >= 0 ? b.charAt(j) - '0' : 0;
+            sb.append(sum % 2);
+            ca = sum / 2;
+        }
+        sb.append(ca == 1 ? ca : "");
+        return sb.reverse().toString();
+
+
+    }
+
     public static void main(String[] args) {
         int[] nums = {9};
         /* System.out.printf("length:" + removeElement(nums, 2));*/
