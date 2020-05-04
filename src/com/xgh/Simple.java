@@ -489,7 +489,71 @@ public class Simple {
         }
         // 因为一定存在，因此无需后处理
         return (int) left;
-  }
+    }
+
+    /**
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * <p>
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     * <p>
+     * 注意：给定 n 是一个正整数。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入： 2
+     * 输出： 2
+     * 解释： 有两种方法可以爬到楼顶。
+     * 1.  1 阶 + 1 阶
+     * 2.  2 阶
+     * 示例 2：
+     * <p>
+     * 输入： 3
+     * 输出： 3
+     * 解释： 有三种方法可以爬到楼顶。
+     * 1.  1 阶 + 1 阶 + 1 阶
+     * 2.  1 阶 + 2 阶
+     * 3.  2 阶 + 1 阶
+     * <p>
+     * 输入： 4
+     * 输出： 5
+     * 解释： 有三种方法可以爬到楼顶。
+     * 1.  1+1+1+1
+     * 1+1+2
+     * 1+2+1
+     * 2+1+1
+     * 2+2
+     *
+     * @param n
+     * @return
+     */
+    public static int climbStairs(int n) {
+
+        /**
+         第 i 阶可以由以下两种方法得到：
+
+         在第 (i−1) 阶后向上爬一阶。
+
+         在第 (i−2) 阶后向上爬 2 阶。
+
+         所以到达第 i 阶的方法总数就是到第 (i−1) 阶和第 (i−2) 阶的方法数之和。
+
+         令 dp[i]表示能到达第 i 阶的方法总数：
+
+         dp[i]=dp[i-1]+dp[i-2]
+         */
+        if (n == 1) {
+            return 1;
+        }
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+
+
+    }
 
     public static void main(String[] args) {
         int[] nums = {9};
@@ -501,11 +565,7 @@ public class Simple {
         //maxSubArray(nums);
         //System.out.println(plusOne(nums));
         System.out.println(mySqrt(2147395600));
-        System.out.println(289398L * 289398L);
-        System.out.println(2147395600);
-        System.out.println(289399 * 289399);
-        System.out.println(46340 * 46340);
-        System.out.println(46350 * 46350);
+
     }
 
 }
