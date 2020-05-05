@@ -555,6 +555,40 @@ public class Simple {
 
     }
 
+
+    /**
+     * 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: 1->1->2
+     * 输出: 1->2
+     * 示例 2:
+     * <p>
+     * 输入: 1->1->2->3->3
+     * 输出: 1->2->3
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode deleteDuplicates(ListNode head) {
+
+        ListNode current = head;
+        while (current != null && current.next != null) {
+            if (current.next.val == current.val) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+            }
+        }
+        return head;
+
+    }
+
     public static void main(String[] args) {
         int[] nums = {9};
         /* System.out.printf("length:" + removeElement(nums, 2));*/
@@ -564,7 +598,18 @@ public class Simple {
         //System.out.printf("" + countAndSay(5));
         //maxSubArray(nums);
         //System.out.println(plusOne(nums));
-        System.out.println(mySqrt(2147395600));
+        //   System.out.println(mySqrt(2147395600));
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(2);
+        ListNode l3 = new ListNode(3);
+        ListNode l4 = new ListNode(3);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        ListNode listNode = deleteDuplicates(l1);
+        while (listNode != null) {
+            System.out.println(listNode.val);
+        }
 
     }
 
