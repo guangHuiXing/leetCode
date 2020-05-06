@@ -589,6 +589,48 @@ public class Simple {
 
     }
 
+
+    /**
+     * 给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+     * <p>
+     *  
+     * <p>
+     * 说明:
+     * <p>
+     * 初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。
+     * 你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。
+     *  
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+
+        int[] result = new int[m + n];
+        int i = 0, j = 0, c = 0;
+        while ((i <= m - 1) && (j <= n - 1)) {
+            if (nums1[i] < nums2[j]) {
+                result[c] = nums1[i];
+                i++;
+            } else {
+                result[c] = nums2[j];
+                j++;
+            }
+
+            c++;
+        }
+
+        if (i == m) {
+            System.arraycopy(result, i + j, nums2, j, n - j + 1);
+        }
+        if (j == n) {
+            System.arraycopy(result, i + j, nums1, i, m - i + 1);
+        }
+
+    }
+
     public static void main(String[] args) {
         int[] nums = {9};
         /* System.out.printf("length:" + removeElement(nums, 2));*/
@@ -599,7 +641,7 @@ public class Simple {
         //maxSubArray(nums);
         //System.out.println(plusOne(nums));
         //   System.out.println(mySqrt(2147395600));
-        ListNode l1 = new ListNode(1);
+       /* ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(2);
         ListNode l3 = new ListNode(3);
         ListNode l4 = new ListNode(3);
@@ -610,7 +652,11 @@ public class Simple {
         while (listNode != null) {
             System.out.println(listNode.val);
         }
+*/
+        int[] nums1 = {1, 2, 3};
+        int[] nums2 = {2, 5, 6};
 
+        merge(nums1, 3, nums2, 3);
     }
 
 }
