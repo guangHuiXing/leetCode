@@ -634,31 +634,32 @@ public class Simple {
 
     /**
      * 给定两个二叉树，编写一个函数来检验它们是否相同。
-     *
+     * <p>
      * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
-     *
+     * <p>
      * 示例 1:
-     *
+     * <p>
      * 输入:       1         1
-     *           / \       / \
-     *          2   3     2   3
-     *
-     *         [1,2,3],   [1,2,3]
-     *
+     * / \       / \
+     * 2   3     2   3
+     * <p>
+     * [1,2,3],   [1,2,3]
+     * <p>
      * 输出: true
      * 示例 2:
-     *
+     * <p>
      * 输入:      1          1
-     *           /           \
-     *          2             2
-     *
-     *         [1,2],     [1,null,2]
-     *
+     * /           \
+     * 2             2
+     * <p>
+     * [1,2],     [1,null,2]
+     * <p>
      * 输出: false
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/same-tree
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param p
      * @param q
      * @return
@@ -674,7 +675,7 @@ public class Simple {
         if (p == null || q == null) {
             return false;
         }
-        if(p.val!= q.val){
+        if (p.val != q.val) {
             return false;
         }
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
@@ -684,49 +685,65 @@ public class Simple {
 
     /**
      * 给定一个二叉树，检查它是否是镜像对称的。
-     *
+     * <p>
      *  
-     *
+     * <p>
      * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
-     *
-     *     1
-     *    / \
-     *   2   2
-     *  / \ / \
+     * <p>
+     * 1
+     * / \
+     * 2   2
+     * / \ / \
      * 3  4 4  3
      *  
-     *
+     * <p>
      * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
-     *
-     *     1
-     *    / \
-     *   2   2
-     *    \   \
-     *    3    3
-     *
+     * <p>
+     * 1
+     * / \
+     * 2   2
+     * \   \
+     * 3    3
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/symmetric-tree
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param root
      * @return
      */
     public boolean isSymmetric(TreeNode root) {
 
-       return isMorrior(root, root);
+        return isMorrior(root, root);
 
     }
 
-    public boolean isMorrior(TreeNode root1,TreeNode root2){
-        if(root1 ==null && root2 == null){
+    public boolean isMorrior(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
             return true;
         }
-        if(root1 == null||root2 ==null){
+        if (root1 == null || root2 == null) {
             return false;
         }
-        if(root1.val !=root2.val){
+        if (root1.val != root2.val) {
             return false;
         }
-        return isMorrior(root1.left,root2.right)&&isMorrior(root2.left,root1.right);
+        return isMorrior(root1.left, root2.right) && isMorrior(root2.left, root1.right);
+    }
+
+    /**
+     * 二叉树的最大深度
+     *
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+        }
+
     }
 
     public static void main(String[] args) {
