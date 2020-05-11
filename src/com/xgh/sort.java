@@ -1,5 +1,8 @@
 package com.xgh;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @ClassName sort
  * @Description
@@ -76,16 +79,61 @@ public class sort {
         return head;
     }
 
+    /**
+     * 3. 无重复字符的最长子串
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: "abcabcbb"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     * 示例 2:
+     * <p>
+     * 输入: "bbbbb"
+     * 输出: 1
+     * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+     * 示例 3:
+     * <p>
+     * 输入: "pwwkew"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     * 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+     *
+     * @param s
+     * @return
+     */
+    public static int lengthOfLongestSubstring(String s) {
+
+        int len = s.length();
+        int start = 0;
+        int max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            if (map.containsKey(s.charAt(i))) {
+                start = Math.max(map.get(c), start);
+            }
+
+            max = Math.max(max, i - start + 1);
+            map.put(s.charAt(i), i + 1);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(1);
+       /* ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(2);
         ListNode l3 = new ListNode(9);
         ListNode l4 = new ListNode(4);
         l1.next = l2;
 
         l3.next = l4;
-       /* ListNode reverse = reverse(l1);
-        System.out.println(reverse.val);*/
-        addTwoNumbers(l1, l3);
+       *//* ListNode reverse = reverse(l1);
+        System.out.println(reverse.val);*//*
+        addTwoNumbers(l1, l3);*/
+
+        lengthOfLongestSubstring("abca");
     }
 }
